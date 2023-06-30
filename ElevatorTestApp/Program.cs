@@ -27,8 +27,8 @@ try
 	// Displaying the elevator status
 	service.DisplayElevatorStatus();
 
-
-    int floor = InputHelper.GetFloor();
+	//Testing
+	int floor = InputHelper.GetFloor();
 	int passengers = InputHelper.GetPassengers();
 	List<int> stops = InputHelper.GetStops(passengers);
 
