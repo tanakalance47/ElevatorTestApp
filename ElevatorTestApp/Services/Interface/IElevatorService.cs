@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElevatorTestApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace ElevatorTestApp.Services.Interface
 	{
 		void CallElevator(int floor, int passengers, List<int> stops);
 		void DisplayElevatorStatus();
+		List<Elevator> GetCurrentElevators();
+		int GetFloorCount();
 	}
 }

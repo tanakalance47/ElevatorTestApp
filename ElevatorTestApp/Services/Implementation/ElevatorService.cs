@@ -12,17 +12,36 @@ namespace ElevatorTestApp.Services.Implementation
 {
 	public class ElevatorService : IElevatorService
 	{
-		public int NumFloors { get; set; }
-		private List<Elevator> elevators;
+		public int _floorCount;
+		public List<Elevator> _elevators;
 
 		public ElevatorService(int numFloors, int numElevators)
 		{
-			NumFloors = numFloors;
-			elevators = new List<Elevator>();
+			_floorCount = numFloors;
+			_elevators = new List<Elevator>();
+
 			for (int i = 0; i < numElevators; i++)
 			{
-				elevators.Add(new Elevator() { Id = i + 1, MaxOccupancy = 8});
+				_elevators.Add(new Elevator() { Id = i + 1, MaxOccupancy = 8});
 			}
+		}
+
+		/// <summary>
+		/// Gets the floor count.
+		/// </summary>
+		/// <returns></returns>
+		public int GetFloorCount() 
+		{ 
+		   return _floorCount;
+		}
+
+		/// <summary>
+		/// Gets the current elevators.
+		/// </summary>
+		/// <returns></returns>
+		public List<Elevator> GetCurrentElevators() 
+		{
+			return _elevators;
 		}
 
 		/// <summary>
@@ -35,7 +54,7 @@ namespace ElevatorTestApp.Services.Implementation
 		{
 			try
 			{
-				if (floor < NumFloors)
+				if (floor < _floorCount)
 				{
 					Elevator closestElevator = null;
 
@@ -68,7 +87,7 @@ namespace ElevatorTestApp.Services.Implementation
 				}
 				else
 				{
-					Console.WriteLine($"The elevators only go up to floor: {NumFloors}.");
+					Console.WriteLine($"The elevators only go up to floor: {_floorCount}.");
 				}	
 			}
 			catch (Exception)
@@ -87,7 +106,7 @@ namespace ElevatorTestApp.Services.Implementation
 				Console.WriteLine("Current elevator Status:");
 				Console.WriteLine("------------------------");
 
-				foreach (Elevator elevator in elevators)
+				foreach (Elevator elevator in _elevators)
 				{
 					Console.WriteLine($"Elevator No: {elevator.Id}");
 					Console.WriteLine($"Current floor: {elevator.CurrentFloor}");
@@ -116,7 +135,7 @@ namespace ElevatorTestApp.Services.Implementation
 			{
 				int closestDistance = int.MaxValue;
 
-				foreach (Elevator elevator in elevators)
+				foreach (Elevator elevator in _elevators)
 				{
 					int distance = Math.Abs(elevator.CurrentFloor - floor);
 					if (!elevator.IsMoving && distance < closestDistance)
@@ -130,7 +149,7 @@ namespace ElevatorTestApp.Services.Implementation
 
 				if (people > availableSpace) 
 				{ 
-				    closestElevator = elevators.Where(X => X.PassengerCount < people).First();
+				    closestElevator = _elevators.Where(X => X.PassengerCount < people).First();
 				}			
 			}
 			catch (Exception)

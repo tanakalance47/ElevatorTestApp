@@ -10,10 +10,10 @@ namespace ElevatorTestApp.Models
 	public class Elevator
 	{
 		public int Id { get; set; }
-		public int CurrentFloor { get; private set; }
-		public bool IsMoving { get; private set; }
-		public Movement CurrentDirection { get; private set; }
-		public int PassengerCount { get; private set; }
+		public int CurrentFloor { get; set; }
+		public bool IsMoving { get; set; }
+		public Movement CurrentDirection { get; set; }
+		public int PassengerCount { get; set; }
 		public int MaxOccupancy { get; set; }
 
 		/// <summary>
